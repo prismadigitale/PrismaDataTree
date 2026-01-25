@@ -39,10 +39,9 @@ trait HasActions
                 if (method_exists($action, 'tree')) {
                     $action = $action->tree($this->getCachedTree());
                 }
+
                 // Set livewire on action
-                else {
-                    $action = $action->livewire($this);
-                }
+                $action = $action->livewire($this);
 
                 return $action;
             };

@@ -24,7 +24,10 @@
             <x-heroicon-m-ellipsis-vertical />
         </button>
 
-        <div class="dd-content dd-nodrag">
+        <div class="dd-content dd-nodrag flex items-center">
+            <button type="button" wire:click="mountTreeAction('addChild', '{{ $recordKey }}')" class="mr-2">
+                <x-heroicon-o-plus-circle class="w-4 h-4 text-gray-400 hover:text-primary-500 transition" />
+            </button>
             @include('filament.tree-plugin.components.tree.item-display', [
                 'record' => $record,
                 'title' => $title,

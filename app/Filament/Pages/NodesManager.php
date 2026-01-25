@@ -14,15 +14,15 @@ use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 
-class ContentManager extends TreePage
+class NodesManager extends TreePage
 {
     protected static string $model = Node::class;
 
     protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-folder-open';
 
-    protected static ?string $navigationLabel = 'Content Manager';
+    protected static ?string $navigationLabel = 'Nodes Manager';
 
-    protected static ?string $title = 'Content Manager';
+    protected static ?string $title = 'Nodes Manager';
 
     // Enable Edit action
     protected function hasEditAction(): bool
@@ -34,6 +34,41 @@ class ContentManager extends TreePage
     protected function hasDeleteAction(): bool
     {
         return true;
+    }
+
+    protected function getTreeQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getTreeQuery()->with(['dataType']);
+    }
+
+    protected function getTreeActions(): array
+    {
+        return array_merge(
+            parent::getTreeActions(),
+            [
+                \App\Filament\TreePlugin\Actions\CreateAction::make('addChild')
+                    ->label('Add Child')
+                    ->icon('heroicon-o-plus')
+                    ->fillForm(function (Node $record): array {
+                        $defaultChildTypeId = \Illuminate\Support\Facades\DB::table('data_types')
+                            ->where('id', $record->data_type_id)
+                            ->value('default_child_type_id');
+                        
+                        // If no default child type on the parent's data type, check global settings
+                        if (! $defaultChildTypeId) {
+                            $defaultChildTypeId = \App\Models\Setting::where('key', 'default_data_type_id')->value('value');
+                        }
+
+                        return [
+                            'parent_id' => $record->id,
+                            'data_type_id' => $defaultChildTypeId ?? $record->data_type_id,
+                        ];
+                    })
+                    ->modalHeading('New node')
+                    ->modalWidth('4xl')
+                    ->extraAttributes(['class' => 'hidden']),
+            ]
+        );
     }
 
     // Define Form Schema for Create/Edit actions

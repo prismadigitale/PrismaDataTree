@@ -8,7 +8,7 @@
 <div class="filament-tree-component" wire:disabled="updateTree" {{-- x-ignore --}} ax-load
     ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-tree-component', 'solution-forest/filament-tree') }}"
     x-data="treeNestableComponent({
-        containerKey: '{{ $containerKey }}',
+        containerKey: '#{{ $containerKey }}',
         maxDepth: {{ $maxDepth }}
     })">
     <x-filament::section>

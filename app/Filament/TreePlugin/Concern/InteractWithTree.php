@@ -162,12 +162,14 @@ trait InteractWithTree
      */
     private function unnestArray(array &$result, array $current, $parent): void
     {
+        $i = 1;
         foreach ($current as $index => $item) {
             $key = data_get($item, 'id');
             $result[$key] = [
                 'parent_id' => $parent,
-                'order' => $index + 1,
+                'order' => $i,
             ];
+            $i++;
             if (isset($item['children']) && count($item['children'])) {
                 $this->unnestArray($result, $item['children'], $key);
             }

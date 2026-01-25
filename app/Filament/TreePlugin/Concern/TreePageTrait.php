@@ -99,6 +99,7 @@ trait TreePageTrait
     protected function configureTreeAction(Action|FilamentActionsAction $action): void
     {
         match (true) {
+            $action instanceof CreateAction => $this->configureCreateAction($action),
             $action instanceof DeleteAction => $this->configureDeleteAction($action),
             $action instanceof EditAction => $this->configureEditAction($action),
             $action instanceof ViewAction => $this->configureViewAction($action),
@@ -172,12 +173,6 @@ trait TreePageTrait
         }
 
         $action->schema($schema);
-
-        $isInfoList = count(array_filter($schema, fn ($component) => $component instanceof Component)) > 0;
-
-        if ($isInfoList) {
-            $action->schema($schema);
-        }
 
         $action->model($this->getModel());
 
