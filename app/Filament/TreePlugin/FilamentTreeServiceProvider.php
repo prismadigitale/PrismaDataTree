@@ -21,7 +21,7 @@ class FilamentTreeServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->loadViewsFrom(resource_path('views/filament/tree-plugin'), 'filament.tree-plugin');
         
         FilamentAsset::register([
-             Css::make('filament-tree-css', asset('vendor/filament-tree/filament-tree.css')),
+             // Css::make('filament-tree-css', asset('vendor/filament-tree/filament-tree.css')),
              AlpineComponent::make('filament-tree-component', asset('vendor/filament-tree/components/filament-tree-component.js')),
              Js::make('filament-tree-js', asset('vendor/filament-tree/filament-tree.js')),
         ], 'solution-forest/filament-tree');
