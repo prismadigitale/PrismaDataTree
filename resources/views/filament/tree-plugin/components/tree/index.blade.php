@@ -15,22 +15,23 @@
         <x-slot name="heading">
             {{ $this->displayTreeTitle() ?? false ? $this->getTreeTitle() : null }}
         </x-slot>
-        <menu class="nestable-menu" id="nestable-menu">
-            <div class="toolbar-btns main">
-                <div class="btn-group">
+        <menu class="nestable-menu flex items-center justify-between mb-4" id="nestable-menu">
+            <div class="toolbar-btns main flex items-center gap-4">
+                <div class="btn-group flex items-center">
                     <x-filament::button color="gray" tag="button" data-action="expand-all" x-on:click="expandAll()"
-                        wire:loading.attr="disabled" wire:loading.class="cursor-wait opacity-70">
+                        wire:loading.attr="disabled" wire:loading.class="cursor-wait opacity-70" size="sm">
                         {{ __('filament.tree-plugin.filament-tree.button.expand_all') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="button" data-action="collapse-all"
                         x-on:click="collapseAll()" wire:loading.attr="disabled"
-                        wire:loading.class="cursor-wait opacity-70">
+                        wire:loading.class="cursor-wait opacity-70" size="sm">
                         {{ __('filament.tree-plugin.filament-tree.button.collapse_all') }}
                     </x-filament::button>
                 </div>
-                <div class="btn-group">
+                <div class="btn-group flex items-center">
                     <x-filament::button tag="button" data-action="save" x-on:click="save()"
-                        wire:loading.attr="disabled" wire:loading.class="cursor-wait opacity-70">
+                        wire:loading.attr="disabled" wire:loading.class="cursor-wait opacity-70" size="sm"
+                        color="primary">
                         <x-filament::loading-indicator class="h-4 w-4" wire:loading wire:target="updateTree" />
                         <span wire:loading.remove wire:target="updateTree">
                             {{ __('filament.tree-plugin.filament-tree.button.save') }}

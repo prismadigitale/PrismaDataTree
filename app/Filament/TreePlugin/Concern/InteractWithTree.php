@@ -12,9 +12,25 @@ use App\Filament\TreePlugin\Support\Utils;
 trait InteractWithTree
 {
     use HasActions;
-    use HasEmptyState;
-    use HasHeading;
     use HasRecords;
+    use HasHeading;
+    use HasEmptyState;
+
+    public array $dataViewVisible = [];
+
+    public function toggleDataView(string $recordKey): void
+    {
+        if (in_array($recordKey, $this->dataViewVisible)) {
+            $this->dataViewVisible = array_values(array_diff($this->dataViewVisible, [$recordKey]));
+        } else {
+            $this->dataViewVisible[] = $recordKey;
+        }
+    }
+
+    public function isDataViewVisible(string $recordKey): bool
+    {
+        return in_array($recordKey, $this->dataViewVisible);
+    }
 
     // protected bool $hasMounted = false;
 
