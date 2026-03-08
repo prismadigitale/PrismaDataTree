@@ -55,6 +55,12 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->renderHook(
+                name: \Filament\View\PanelsRenderHook::SIDEBAR_NAV_START,
+                hook: fn (): string => request()->routeIs('filament.admin.pages.nodes-manager') 
+                    ? \Illuminate\Support\Facades\Blade::render('@include("filament.components.tree-search-sidebar")') 
+                    : '',
+            );
     }
 }

@@ -11,14 +11,15 @@
         containerKey: '#{{ $containerKey }}',
         maxDepth: {{ $maxDepth }}
     })">
-    <x-filament::section>
-        <x-slot name="heading">
-            {{ $this->displayTreeTitle() ?? false ? $this->getTreeTitle() : null }}
-        </x-slot>
-        <menu class="nestable-menu flex items-center justify-between mb-4" id="nestable-menu">
-            <div class="toolbar-btns main flex items-center gap-4">
-                <div class="btn-group flex items-center">
-                    <x-filament::button color="gray" tag="button" data-action="expand-all" x-on:click="expandAll()"
+    <div class="w-full">
+        <x-filament::section>
+            <x-slot name="heading">
+                {{ $this->displayTreeTitle() ?? false ? $this->getTreeTitle() : null }}
+            </x-slot>
+            <menu class="nestable-menu flex items-center justify-between mb-4" id="nestable-menu">
+                <div class="toolbar-btns main flex items-center gap-4">
+                    <div class="btn-group flex items-center gap-2">
+                        <x-filament::button color="gray" tag="button" data-action="expand-all" x-on:click="expandAll()"
                         wire:loading.attr="disabled" wire:loading.class="cursor-wait opacity-70" size="sm">
                         {{ __('filament.tree-plugin.filament-tree.button.expand_all') }}
                     </x-filament::button>
@@ -52,4 +53,5 @@
             ])
         </div>
     </x-filament::section>
+
 </div>
