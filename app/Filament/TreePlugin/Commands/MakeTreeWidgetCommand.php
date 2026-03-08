@@ -2,6 +2,7 @@
 
 namespace App\Filament\TreePlugin\Commands;
 
+use App\Filament\TreePlugin\Commands\FileGenerators\TreeWidgetClassGenerator;
 use Filament\Support\Commands\Concerns\CanAskForLivewireComponentLocation;
 use Filament\Support\Commands\Concerns\CanAskForResource;
 use Filament\Support\Commands\Concerns\CanManipulateFiles;
@@ -14,7 +15,6 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use ReflectionClass;
-use App\Filament\TreePlugin\Commands\FileGenerators\TreeWidgetClassGenerator;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;

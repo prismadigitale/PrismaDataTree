@@ -2,13 +2,13 @@
 
 namespace App\Filament\TreePlugin\Components;
 
-use Filament\Actions\ActionGroup as FilamentActionsActionGroup;
-use Filament\Support\Components\ViewComponent;
-use Illuminate\Database\Eloquent\Model;
 use App\Filament\TreePlugin\Actions\ActionGroup;
 use App\Filament\TreePlugin\Concern\BelongsToLivewire;
 use App\Filament\TreePlugin\Contract\HasTree;
 use App\Filament\TreePlugin\Support\Utils;
+use Filament\Actions\ActionGroup as FilamentActionsActionGroup;
+use Filament\Support\Components\ViewComponent;
+use Illuminate\Database\Eloquent\Model;
 
 class Tree extends ViewComponent
 {

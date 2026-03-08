@@ -2,9 +2,9 @@
 
 namespace App\Filament\TreePlugin\Concern;
 
+use App\Filament\TreePlugin\Actions\Action;
 use Closure;
 use Illuminate\Contracts\View\View;
-use App\Filament\TreePlugin\Actions\Action;
 
 trait HasEmptyState
 {

@@ -2,12 +2,12 @@
 
 namespace App\Filament\TreePlugin\Concern\TreeRecords;
 
-use Filament\Actions\CreateAction;
-use Illuminate\Database\Eloquent\Model;
 use App\Filament\TreePlugin\Actions;
 use App\Filament\TreePlugin\Actions\EditAction;
 use App\Filament\TreePlugin\Actions\ViewAction;
 use App\Filament\TreePlugin\Concern\HasTranslatableRecords;
+use Filament\Actions\CreateAction;
+use Illuminate\Database\Eloquent\Model;
 
 trait Translatable
 {

@@ -2,10 +2,10 @@
 
 namespace App\Filament\TreePlugin\Concern\Actions;
 
-use Filament\Actions\Action as BaseAction;
-use Illuminate\Support\Js;
 use App\Filament\TreePlugin\Actions\Action;
 use App\Filament\TreePlugin\Concern\BelongsToTree;
+use Filament\Actions\Action as BaseAction;
+use Illuminate\Support\Js;
 
 trait TreeActionTrait
 {

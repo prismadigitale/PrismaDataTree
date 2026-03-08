@@ -2,17 +2,17 @@
 
 namespace App\Filament\TreePlugin\Resources\Pages;
 
+use App\Filament\TreePlugin\Actions\DeleteAction;
+use App\Filament\TreePlugin\Actions\EditAction;
+use App\Filament\TreePlugin\Actions\ViewAction;
+use App\Filament\TreePlugin\Concern\TreePageTrait;
+use App\Filament\TreePlugin\Contract\HasTree;
 use Filament\Actions\CreateAction;
 use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
 use Filament\Resources\Pages\Page as BasePage;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Model;
-use App\Filament\TreePlugin\Actions\DeleteAction;
-use App\Filament\TreePlugin\Actions\EditAction;
-use App\Filament\TreePlugin\Actions\ViewAction;
-use App\Filament\TreePlugin\Concern\TreePageTrait;
-use App\Filament\TreePlugin\Contract\HasTree;
 
 abstract class TreePage extends BasePage implements HasTree
 {

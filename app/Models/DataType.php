@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Field;
-use App\Models\Node;
 
 class DataType extends Model
 {

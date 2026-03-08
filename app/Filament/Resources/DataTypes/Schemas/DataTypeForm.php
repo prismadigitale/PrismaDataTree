@@ -13,8 +13,7 @@ class DataTypeForm
                 \Filament\Forms\Components\TextInput::make('name')
                     ->required()
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn ($state, \Filament\Schemas\Components\Utilities\Set $set) => 
-                        $set('slug', \Illuminate\Support\Str::slug($state, '_'))
+                    ->afterStateUpdated(fn ($state, \Filament\Schemas\Components\Utilities\Set $set) => $set('slug', \Illuminate\Support\Str::slug($state, '_'))
                     ),
                 \Filament\Forms\Components\TextInput::make('slug')
                     ->required()

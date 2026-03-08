@@ -2,9 +2,9 @@
 
 namespace App\Filament\TreePlugin\Actions;
 
-use Filament\Actions\ActionGroup as BaseActionGroup;
 use App\Filament\TreePlugin\Components\Tree;
 use App\Filament\TreePlugin\Concern\Actions\HasTree;
+use Filament\Actions\ActionGroup as BaseActionGroup;
 
 class ActionGroup extends BaseActionGroup implements HasTree
 {

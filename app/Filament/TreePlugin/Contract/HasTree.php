@@ -2,9 +2,9 @@
 
 namespace App\Filament\TreePlugin\Contract;
 
+use App\Filament\TreePlugin\Components\Tree;
 use Filament\Support\Contracts\TranslatableContentDriver;
 use Illuminate\Database\Eloquent\Model;
-use App\Filament\TreePlugin\Components\Tree;
 
 interface HasTree
 {

@@ -22,7 +22,7 @@ class SettingResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static string | \UnitEnum | null $navigationGroup = 'Configurations';
+    protected static string|\UnitEnum|null $navigationGroup = 'Configurations';
 
     protected static ?string $recordTitleAttribute = 'key';
 
@@ -59,6 +59,7 @@ class SettingResource extends Resource
                         if ($record->key === 'default_data_type_id') {
                             return \App\Models\DataType::find($state)?->name ?? $state;
                         }
+
                         return $state;
                     }),
             ])

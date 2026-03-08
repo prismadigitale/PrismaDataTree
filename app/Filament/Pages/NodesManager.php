@@ -7,7 +7,6 @@ use App\Models\DataType;
 use App\Models\Node;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Group;
@@ -53,7 +52,7 @@ class NodesManager extends TreePage
                         $defaultChildTypeId = \Illuminate\Support\Facades\DB::table('data_types')
                             ->where('id', $record->data_type_id)
                             ->value('default_child_type_id');
-                        
+
                         // If no default child type on the parent's data type, check global settings
                         if (! $defaultChildTypeId) {
                             $defaultChildTypeId = \App\Models\Setting::where('key', 'default_data_type_id')->value('value');
@@ -67,6 +66,69 @@ class NodesManager extends TreePage
                     ->modalHeading('New node')
                     ->modalWidth('4xl')
                     ->extraAttributes(['class' => 'hidden']),
+            ]
+        );
+    }
+
+    protected function getActions(): array
+    {
+        return array_merge(
+            parent::getActions(),
+            [
+                \Filament\Actions\Action::make('importTreeLine')
+                    ->label('Import from TreeLine (.trl)')
+                    ->icon('heroicon-o-arrow-up-tray')
+                    ->form([
+                        \Filament\Forms\Components\TextInput::make('root_name')
+                            ->label('Root Node Name')
+                            ->required()
+                            ->default('Imported Data'),
+                        \Filament\Forms\Components\FileUpload::make('file')
+                            ->label('TreeLine (.trl, .xml) File')
+                            ->required()
+                            ->disk('local')
+                            ->directory('imports')
+                            ->rules([
+                                fn () => function (string $attribute, $value, \Closure $fail) {
+                                    $file = is_array($value) ? array_values($value)[0] ?? null : $value;
+
+                                    if ($file && method_exists($file, 'getClientOriginalExtension')) {
+                                        $extension = strtolower($file->getClientOriginalExtension());
+                                        if (! in_array($extension, ['xml', 'trl'])) {
+                                            $fail('Puoi importare solo file con estensione .trl o .xml da TreeLine.');
+                                        }
+                                    } elseif (is_string($file)) {
+                                        $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                                        if (! in_array($extension, ['xml', 'trl'])) {
+                                            $fail('Puoi importare solo file con estensione .trl o .xml da TreeLine.');
+                                        }
+                                    }
+                                },
+                            ]),
+                    ])
+                    ->action(function (array $data, \App\Actions\ImportTreeLineAction $importer) {
+                        $file = $data['file'];
+                        $path = \Illuminate\Support\Facades\Storage::disk('local')->path($file);
+
+                        try {
+                            $importer->execute($path, $data['root_name']);
+
+                            \Filament\Notifications\Notification::make()
+                                ->title('Import Successful')
+                                ->success()
+                                ->send();
+
+                            \Illuminate\Support\Facades\Storage::disk('local')->delete($file);
+
+                            return redirect(request()->header('Referer'));
+                        } catch (\Exception $e) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('Import Failed')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    }),
             ]
         );
     }
@@ -92,7 +154,7 @@ class NodesManager extends TreePage
                     $parent = Node::find($parentId);
                     if ($parent && $parent->dataType?->default_child_type_id) {
                         $set('data_type_id', $parent->dataType->default_child_type_id);
-                        
+
                         // Also trigger the data reset for the new type
                         $set('data', []);
                     }
@@ -120,7 +182,7 @@ class NodesManager extends TreePage
                     foreach ($dataType->fields as $field) {
                         $component = match ($field->type) {
                             'text' => TextInput::make("data.{$field->name}"),
-                            'textarea' => Textarea::make("data.{$field->name}"),
+                            'textarea' => \Filament\Forms\Components\RichEditor::make("data.{$field->name}"),
                             'number' => TextInput::make("data.{$field->name}")->numeric(),
                             'date' => DatePicker::make("data.{$field->name}"),
                             'toggle' => Toggle::make("data.{$field->name}"),

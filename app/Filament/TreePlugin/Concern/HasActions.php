@@ -2,13 +2,13 @@
 
 namespace App\Filament\TreePlugin\Concern;
 
+use App\Filament\TreePlugin\Actions\Action;
+use App\Filament\TreePlugin\Actions\ActionGroup;
+use App\Filament\TreePlugin\Contract\HasTree;
 use Filament\Actions\Action as FilamentActionsAction;
 use Filament\Actions\Exceptions\ActionNotResolvableException;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Model;
-use App\Filament\TreePlugin\Actions\Action;
-use App\Filament\TreePlugin\Actions\ActionGroup;
-use App\Filament\TreePlugin\Contract\HasTree;
 
 trait HasActions
 {

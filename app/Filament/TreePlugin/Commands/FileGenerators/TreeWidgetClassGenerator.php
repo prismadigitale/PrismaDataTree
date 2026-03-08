@@ -2,13 +2,13 @@
 
 namespace App\Filament\TreePlugin\Commands\FileGenerators;
 
-use Filament\Support\Commands\FileGenerators\ClassGenerator;
-use Illuminate\Database\Eloquent\Model;
-use Nette\PhpGenerator\ClassType;
 use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateModelProperty;
 use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateTreeMethods;
 use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateTreeProperties;
 use App\Filament\TreePlugin\Widgets\Tree;
+use Filament\Support\Commands\FileGenerators\ClassGenerator;
+use Illuminate\Database\Eloquent\Model;
+use Nette\PhpGenerator\ClassType;
 
 class TreeWidgetClassGenerator extends ClassGenerator
 {

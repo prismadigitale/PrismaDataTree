@@ -2,6 +2,8 @@
 
 namespace App\Filament\TreePlugin\Commands;
 
+use App\Filament\TreePlugin\Commands\FileGenerators\ResourceTreePageClassGenerator;
+use App\Filament\TreePlugin\Commands\FileGenerators\TreePageClassGenerator;
 use Filament\Support\Commands\Concerns\CanAskForRelatedModel;
 use Filament\Support\Commands\Concerns\CanAskForRelatedResource;
 use Filament\Support\Commands\Concerns\CanAskForResource;
@@ -17,8 +19,6 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use ReflectionClass;
-use App\Filament\TreePlugin\Commands\FileGenerators\ResourceTreePageClassGenerator;
-use App\Filament\TreePlugin\Commands\FileGenerators\TreePageClassGenerator;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;

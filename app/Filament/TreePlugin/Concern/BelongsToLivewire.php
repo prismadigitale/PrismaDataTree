@@ -2,8 +2,8 @@
 
 namespace App\Filament\TreePlugin\Concern;
 
-use Filament\Support\Contracts\TranslatableContentDriver;
 use App\Filament\TreePlugin\Contract\HasTree;
+use Filament\Support\Contracts\TranslatableContentDriver;
 
 trait BelongsToLivewire
 {

@@ -2,13 +2,13 @@
 
 namespace App\Filament\TreePlugin\Commands\FileGenerators;
 
+use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateTreeMethods;
+use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateTreeProperties;
+use App\Filament\TreePlugin\Resources\Pages\TreePage;
 use Filament\Commands\FileGenerators\Resources\Pages\Concerns\CanGenerateResourceProperty;
 use Filament\Resources\Resource;
 use Filament\Support\Commands\FileGenerators\ClassGenerator;
 use Nette\PhpGenerator\ClassType;
-use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateTreeMethods;
-use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateTreeProperties;
-use App\Filament\TreePlugin\Resources\Pages\TreePage;
 
 class ResourceTreePageClassGenerator extends ClassGenerator
 {

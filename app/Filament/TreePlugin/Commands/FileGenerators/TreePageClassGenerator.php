@@ -2,16 +2,16 @@
 
 namespace App\Filament\TreePlugin\Commands\FileGenerators;
 
+use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateModelProperty;
+use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateTreeMethods;
+use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateTreeProperties;
+use App\Filament\TreePlugin\Pages\TreePage;
 use Filament\Clusters\Cluster;
 use Filament\Support\Commands\FileGenerators\ClassGenerator;
 use Illuminate\Database\Eloquent\Model;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Literal;
 use Nette\PhpGenerator\Property;
-use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateModelProperty;
-use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateTreeMethods;
-use App\Filament\TreePlugin\Commands\FileGenerators\Concerns\CanGenerateTreeProperties;
-use App\Filament\TreePlugin\Pages\TreePage;
 
 class TreePageClassGenerator extends ClassGenerator
 {

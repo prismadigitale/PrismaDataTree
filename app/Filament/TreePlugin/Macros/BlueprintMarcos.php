@@ -2,8 +2,8 @@
 
 namespace App\Filament\TreePlugin\Macros;
 
-use Illuminate\Database\Schema\Blueprint;
 use App\Filament\TreePlugin\Support\Utils;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * @see Blueprint

@@ -2,14 +2,13 @@
 
 namespace App\Filament\TreePlugin\Concern;
 
-use Filament\Actions\Action as FilamentActionsAction;
-use Filament\Actions\CreateAction;
-use Filament\Schemas\Components\Component;
 use App\Filament\TreePlugin\Actions\Action;
 use App\Filament\TreePlugin\Actions\DeleteAction;
 use App\Filament\TreePlugin\Actions\EditAction;
 use App\Filament\TreePlugin\Actions\ViewAction;
 use App\Filament\TreePlugin\Components\Tree;
+use Filament\Actions\Action as FilamentActionsAction;
+use Filament\Actions\CreateAction;
 
 trait TreePageTrait
 {

@@ -2,10 +2,6 @@
 
 namespace App\Filament\TreePlugin\Widgets;
 
-use Filament\Actions\Action as FilamentActionsAction;
-use Filament\Actions\CreateAction as FilamentActionsCreateAction;
-use Filament\Support\Contracts\TranslatableContentDriver;
-use Illuminate\Database\Eloquent\Model;
 use App\Filament\TreePlugin\Actions\Action;
 use App\Filament\TreePlugin\Actions\CreateAction;
 use App\Filament\TreePlugin\Actions\DeleteAction;
@@ -14,6 +10,10 @@ use App\Filament\TreePlugin\Actions\ViewAction;
 use App\Filament\TreePlugin\Components\Tree as TreeComponent;
 use App\Filament\TreePlugin\Concern\InteractWithTree;
 use App\Filament\TreePlugin\Contract\HasTree;
+use Filament\Actions\Action as FilamentActionsAction;
+use Filament\Actions\CreateAction as FilamentActionsCreateAction;
+use Filament\Support\Contracts\TranslatableContentDriver;
+use Illuminate\Database\Eloquent\Model;
 
 class Tree extends BaseWidget implements HasTree
 {

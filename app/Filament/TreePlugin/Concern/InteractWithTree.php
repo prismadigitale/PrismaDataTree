@@ -2,35 +2,20 @@
 
 namespace App\Filament\TreePlugin\Concern;
 
+use App\Filament\TreePlugin\Components\Tree;
+use App\Filament\TreePlugin\Support\Utils;
 use Closure;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
-use App\Filament\TreePlugin\Components\Tree;
-use App\Filament\TreePlugin\Support\Utils;
 
 trait InteractWithTree
 {
     use HasActions;
-    use HasRecords;
-    use HasHeading;
     use HasEmptyState;
+    use HasHeading;
+    use HasRecords;
 
-    public array $dataViewVisible = [];
-
-    public function toggleDataView(string $recordKey): void
-    {
-        if (in_array($recordKey, $this->dataViewVisible)) {
-            $this->dataViewVisible = array_values(array_diff($this->dataViewVisible, [$recordKey]));
-        } else {
-            $this->dataViewVisible[] = $recordKey;
-        }
-    }
-
-    public function isDataViewVisible(string $recordKey): bool
-    {
-        return in_array($recordKey, $this->dataViewVisible);
-    }
 
     // protected bool $hasMounted = false;
 
