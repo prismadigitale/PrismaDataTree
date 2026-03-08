@@ -23,6 +23,7 @@ class Node extends Model
         'parent_id',
         'data_type_id',
         'title',
+        'treeline_uid',
         'data',
         'order',
     ];

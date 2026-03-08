@@ -25,17 +25,24 @@ class ImportTreeLineAction
             throw new \Exception('Invalid XML file.');
         }
 
-        // Create the root node to contain all imports
-        // Use a generic DataType for the root, or create one if none exists.
+        // Extract the root uniqueid if available
+        $rootUniqueId = isset($xml->attributes()['uniqueid'])
+            ? (string) $xml->attributes()['uniqueid']
+            : Str::slug($rootTitle);
+
+        // Create or update the root node
         $rootDataType = $this->getOrCreateDataType('Imported Root', 'heroicon-o-folder');
 
-        $rootNode = Node::create([
-            'title' => $rootTitle,
-            'data_type_id' => $rootDataType->id,
-            'data' => [],
-            'parent_id' => null,
-            'order' => 1,
-        ]);
+        $rootNode = Node::updateOrCreate(
+            ['treeline_uid' => $rootUniqueId],
+            [
+                'title' => $rootTitle,
+                'data_type_id' => $rootDataType->id,
+                'data' => [],
+                'parent_id' => null,
+                'order' => 1,
+            ]
+        );
 
         $this->parseNode($xml, $rootNode);
     }
@@ -51,8 +58,10 @@ class ImportTreeLineAction
                 // It's a node
                 $tagName = $child->getName();
 
+                // Extract uniqueid for deduplication
+                $uniqueId = isset($attributes['uniqueid']) ? (string) $attributes['uniqueid'] : null;
+
                 // Title is either from the 'Name' or 'NomeDominio' sub-elements, or generic
-                // We test sequentially some common TreeLine elements
                 $rawTitle = (string) $child->Name ?: ((string) $child->NomeDominio ?: ((string) $child->NomeStep ?: $tagName.' Node'));
                 $title = \Illuminate\Support\Str::limit(strip_tags($rawTitle), 250);
 
@@ -82,13 +91,27 @@ class ImportTreeLineAction
 
                 $this->ensureFieldsExistOnDataType($dataType, $fieldsToProcess);
 
-                $node = Node::create([
-                    'title' => $title,
-                    'data_type_id' => $dataType->id,
-                    'data' => $data,
-                    'parent_id' => $parentNode->id,
-                    'order' => Node::where('parent_id', $parentNode->id)->max('order') + 1,
-                ]);
+                // Use updateOrCreate if we have a uniqueid, otherwise fallback to create
+                if ($uniqueId) {
+                    $node = Node::updateOrCreate(
+                        ['treeline_uid' => $uniqueId],
+                        [
+                            'title' => $title,
+                            'data_type_id' => $dataType->id,
+                            'data' => $data,
+                            'parent_id' => $parentNode->id,
+                            'order' => Node::where('parent_id', $parentNode->id)->max('order') + 1,
+                        ]
+                    );
+                } else {
+                    $node = Node::create([
+                        'title' => $title,
+                        'data_type_id' => $dataType->id,
+                        'data' => $data,
+                        'parent_id' => $parentNode->id,
+                        'order' => Node::where('parent_id', $parentNode->id)->max('order') + 1,
+                    ]);
+                }
 
                 // Recursively parse children of this node
                 $this->parseNode($child, $node);
