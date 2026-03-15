@@ -60,7 +60,5 @@ Questa feature traduce etichette per Data Types, Fields, Settings, ma anche gli 
 
 - **Core & Framework API:** Laravel 12.x
 - **Admin Panel & Interfacce:** FilamentPHP 5.x / Livewire 4.x
-- **Ambiente Locale:** [DDEV](https://ddev.com/) (MySQL/MariaDB, PHP 8.3+)
-- **Stile:** Tailwind CSS (v4 standard Filament / JIT compilato)
-
-*Progetto locale privato. Cartelle di configurazione (es. `.ddev`, `.github`, ecc.) ignorate da repository origin per scopi di deployment standard.*
+- **Database Server:** MySQL/MariaDB (PHP 8.3+)
+- **Stile:** Tailwind CSS (v4 standard Filament)
