@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Version
+    |--------------------------------------------------------------------------
+    |
+    | This value is the current version of the application. It is displayed
+    | in the admin panel footer and should match the latest Git tag.
+    | Follow SemVer: Major.Minor.Patch (e.g. 0.1.0, 1.0.0, 1.2.3)
+    |
+    */
+
+    'version' => '0.1.0',
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |

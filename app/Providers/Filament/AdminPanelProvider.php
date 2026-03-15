@@ -58,9 +58,13 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->renderHook(
                 name: \Filament\View\PanelsRenderHook::SIDEBAR_NAV_START,
-                hook: fn (): string => request()->routeIs('filament.admin.pages.nodes-manager') 
-                    ? \Illuminate\Support\Facades\Blade::render('@include("filament.components.tree-search-sidebar")') 
+                hook: fn (): string => request()->routeIs('filament.admin.pages.nodes-manager')
+                    ? \Illuminate\Support\Facades\Blade::render('@include("filament.components.tree-search-sidebar")')
                     : '',
+            )
+            ->renderHook(
+                name: \Filament\View\PanelsRenderHook::SIDEBAR_FOOTER,
+                hook: fn (): string => '<div class="px-6 py-3 text-xs text-gray-500 dark:text-gray-400">v'.config('app.version').'</div>',
             );
     }
 }
