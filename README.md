@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/images/logo.png" alt="PrismaDataTree Logo" width="200">
+</p>
+
 # PrismaDataTree
 
 PrismaDataTree è un'applicazione web basata su **Laravel 12** e **Filament 5** progettata per la gestione avanzata, la visualizzazione e la ricerca di dati strutturati ad albero (Nodi).
