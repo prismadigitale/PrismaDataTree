@@ -21,7 +21,7 @@ class DataTypeForm
                 \Filament\Forms\Components\TextInput::make('icon')
                     ->placeholder('heroicon-o-folder'),
                 \Filament\Forms\Components\Select::make('default_child_type_id')
-                    ->label('Default Child Type')
+                    ->label(__('messages.default_child_type'))
                     ->relationship('defaultChildType', 'name')
                     ->searchable()
                     ->preload(),

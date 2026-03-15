@@ -19,9 +19,15 @@ class NodesManager extends TreePage
 
     protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-folder-open';
 
-    protected static ?string $navigationLabel = 'Nodes Manager';
+    public static function getNavigationLabel(): string
+    {
+        return __('messages.nodes_manager');
+    }
 
-    protected static ?string $title = 'Nodes Manager';
+    public function getTitle(): string|\Illuminate\Contracts\Support\Htmlable
+    {
+        return __('messages.nodes_manager');
+    }
 
     // Enable Edit action
     protected function hasEditAction(): bool
@@ -46,7 +52,7 @@ class NodesManager extends TreePage
             parent::getTreeActions(),
             [
                 \App\Filament\TreePlugin\Actions\CreateAction::make('addChild')
-                    ->label('Add Child')
+                    ->label(__('messages.add_child'))
                     ->icon('heroicon-o-plus')
                     ->fillForm(function (Node $record): array {
                         $defaultChildTypeId = \Illuminate\Support\Facades\DB::table('data_types')
@@ -63,7 +69,7 @@ class NodesManager extends TreePage
                             'data_type_id' => $defaultChildTypeId ?? $record->data_type_id,
                         ];
                     })
-                    ->modalHeading('New node')
+                    ->modalHeading(__('messages.new_node'))
                     ->modalWidth('4xl')
                     ->extraAttributes(['class' => 'hidden']),
             ]
@@ -76,15 +82,15 @@ class NodesManager extends TreePage
             parent::getActions(),
             [
                 \Filament\Actions\Action::make('importTreeLine')
-                    ->label('Import from TreeLine (.trl)')
+                    ->label(__('messages.import_treeline'))
                     ->icon('heroicon-o-arrow-up-tray')
                     ->form([
                         \Filament\Forms\Components\TextInput::make('root_name')
-                            ->label('Root Node Name')
+                            ->label(__('messages.root_node_name'))
                             ->required()
                             ->default('Imported Data'),
                         \Filament\Forms\Components\FileUpload::make('file')
-                            ->label('TreeLine (.trl, .xml) File')
+                            ->label(__('messages.treeline_file'))
                             ->required()
                             ->disk('local')
                             ->directory('imports')
@@ -114,7 +120,7 @@ class NodesManager extends TreePage
                             $importer->execute($path, $data['root_name']);
 
                             \Filament\Notifications\Notification::make()
-                                ->title('Import Successful')
+                                ->title(__('messages.import_successful'))
                                 ->success()
                                 ->send();
 
@@ -123,7 +129,7 @@ class NodesManager extends TreePage
                             return redirect(request()->header('Referer'));
                         } catch (\Exception $e) {
                             \Filament\Notifications\Notification::make()
-                                ->title('Import Failed')
+                                ->title(__('messages.import_failed'))
                                 ->body($e->getMessage())
                                 ->danger()
                                 ->send();
@@ -143,7 +149,7 @@ class NodesManager extends TreePage
             Select::make('parent_id')
                 ->relationship('parent', 'title')
                 ->searchable()
-                ->placeholder('Root (leave empty for root node)')
+                ->placeholder(__('messages.root_placeholder'))
                 ->live()
                 ->afterStateUpdated(function (Get $get, Set $set) {
                     $parentId = $get('parent_id');
@@ -162,7 +168,7 @@ class NodesManager extends TreePage
             Select::make('data_type_id')
                 ->relationship('dataType', 'name')
                 ->searchable()
-                ->placeholder('Select data type')
+                ->placeholder(__('messages.select_data_type'))
                 ->live()
                 ->afterStateUpdated(fn ($state, Set $set) => $set('data', [])),
 

@@ -20,7 +20,20 @@ class FieldResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Configurations';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('messages.configurations');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('messages.field');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('messages.fields');
+    }
 
     protected static ?string $recordTitleAttribute = 'name';
 

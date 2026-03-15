@@ -28,14 +28,14 @@
         <x-slot name="heading">
             <div class="flex items-center gap-2 text-sm">
                 <x-filament::icon icon="heroicon-o-magnifying-glass" class="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                <span class="font-bold">Search</span>
+                <span class="font-bold">{{ __('messages.search') }}</span>
             </div>
         </x-slot>
 
         <div class="pt-2">
             <!-- Search Input -->
             <div style="position: relative; margin-bottom: 1rem;">
-                <input type="text" x-model="searchText" @keydown.enter="findNext()" placeholder="Search terms..."
+                <input type="text" x-model="searchText" @keydown.enter="findNext()" placeholder="{{ __('messages.search_terms') }}"
                     style="width: 100%; padding: 0.5rem 2rem 0.5rem 0.75rem; border-width: 1px; border-radius: 0.5rem;"
                     class="text-sm border-gray-300 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-primary-500 focus:border-primary-500">
                 <button x-show="searchText.length > 0" @click="searchText = ''; findMatches()"
@@ -48,15 +48,15 @@
             <!-- Action Buttons -->
             <div class="flex items-center gap-3 mb-4">
                 <x-filament::button color="gray" size="sm" @click="findPrevious()"
-                    class="flex-1 justify-center">Prev</x-filament::button>
+                    class="flex-1 justify-center">{{ __('messages.prev') }}</x-filament::button>
                 <x-filament::button color="primary" size="sm" @click="findNext()"
-                    class="flex-1 justify-center">Next</x-filament::button>
+                    class="flex-1 justify-center">{{ __('messages.next') }}</x-filament::button>
             </div>
 
             <!-- Match Status indicator -->
             <div class="text-[11px] font-medium text-gray-500 dark:text-gray-400 flex items-center justify-between mb-4">
                 <span
-                    x-text="matches.length > 0 ? `Match ${currentIndex + 1} of ${matches.length}` : (searchText ? 'No matches' : 'Ready')"></span>
+                    x-text="matches.length > 0 ? `{{ __('messages.match_of') }}`.replace(':current', currentIndex + 1).replace(':total', matches.length) : (searchText ? '{{ __('messages.no_matches') }}' : '{{ __('messages.ready') }}')"></span>
                 <span x-show="matches.length > 0" class="flex gap-1.5 items-center" style="display: none;">
                     <span class="w-2 h-2 rounded-full bg-primary-500 inline-block animate-pulse"></span>
                 </span>
@@ -66,7 +66,7 @@
             <div x-data="{ advancedOpen: false }" class="pt-4 mt-2 border-t border-gray-100 dark:border-gray-800">
                 <button @click="advancedOpen = !advancedOpen" type="button"
                     class="flex items-center justify-between w-full text-xs font-semibold text-gray-600 transition dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400">
-                    <span class="uppercase tracking-wider">Advanced</span>
+                    <span class="uppercase tracking-wider">{{ __('messages.advanced') }}</span>
                     <x-filament::icon x-show="!advancedOpen" icon="heroicon-m-chevron-down" class="w-4 h-4" />
                     <x-filament::icon x-show="advancedOpen" style="display: none;" icon="heroicon-m-chevron-up"
                         class="w-4 h-4" />
@@ -77,19 +77,19 @@
                     <!-- Scope -->
                     <div class="mb-5">
                         <span
-                            class="block text-[11px] font-bold text-gray-400 dark:text-gray-500 mb-2 uppercase tracking-wide">Scope</span>
+                            class="block text-[11px] font-bold text-gray-400 dark:text-gray-500 mb-2 uppercase tracking-wide">{{ __('messages.scope') }}</span>
                         <div class="flex flex-col gap-2.5">
                             <label
                                 class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary-600 transition-colors">
                                 <input type="radio" x-model="searchScope" value="full"
                                     class="w-4 h-4 text-primary-600 focus:ring-primary-500 dark:bg-gray-800 dark:border-gray-600">
-                                <span>Titles + Details</span>
+                                <span>{{ __('messages.titles_details') }}</span>
                             </label>
                             <label
                                 class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary-600 transition-colors">
                                 <input type="radio" x-model="searchScope" value="titles"
                                     class="w-4 h-4 text-primary-600 focus:ring-primary-500 dark:bg-gray-800 dark:border-gray-600">
-                                <span>Titles only</span>
+                                <span>{{ __('messages.titles_only') }}</span>
                             </label>
                         </div>
                     </div>
@@ -97,31 +97,31 @@
                     <!-- Method -->
                     <div class="mb-2">
                         <span
-                            class="block text-[11px] font-bold text-gray-400 dark:text-gray-500 mb-2 uppercase tracking-wide">Method</span>
+                            class="block text-[11px] font-bold text-gray-400 dark:text-gray-500 mb-2 uppercase tracking-wide">{{ __('messages.method') }}</span>
                         <div class="flex flex-col gap-2.5">
                             <label
                                 class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary-600 transition-colors">
                                 <input type="radio" x-model="searchMethod" value="keywords"
                                     class="w-4 h-4 text-primary-600 focus:ring-primary-500 dark:bg-gray-800 dark:border-gray-600">
-                                <span>Key words</span>
+                                <span>{{ __('messages.keywords') }}</span>
                             </label>
                             <label
                                 class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary-600 transition-colors">
                                 <input type="radio" x-model="searchMethod" value="full_words"
                                     class="w-4 h-4 text-primary-600 focus:ring-primary-500 dark:bg-gray-800 dark:border-gray-600">
-                                <span>Exact full words</span>
+                                <span>{{ __('messages.exact_full_words') }}</span>
                             </label>
                             <label
                                 class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary-600 transition-colors">
                                 <input type="radio" x-model="searchMethod" value="phrase"
                                     class="w-4 h-4 text-primary-600 focus:ring-primary-500 dark:bg-gray-800 dark:border-gray-600">
-                                <span>Exact phrase</span>
+                                <span>{{ __('messages.exact_phrase') }}</span>
                             </label>
                             <label
                                 class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary-600 transition-colors">
                                 <input type="radio" x-model="searchMethod" value="regex"
                                     class="w-4 h-4 text-primary-600 focus:ring-primary-500 dark:bg-gray-800 dark:border-gray-600">
-                                <span>Regular expression</span>
+                                <span>{{ __('messages.regular_expression') }}</span>
                             </label>
                         </div>
                     </div>

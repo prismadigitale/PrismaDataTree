@@ -27,7 +27,7 @@ class FieldsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('name')->label('Field Name')->searchable(),
+                TextColumn::make('name')->label(__('messages.field_name'))->searchable(),
                 TextColumn::make('label')->searchable(),
                 TextColumn::make('type')->badge(),
             ])

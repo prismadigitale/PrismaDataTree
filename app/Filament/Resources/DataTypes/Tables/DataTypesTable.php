@@ -17,7 +17,7 @@ class DataTypesTable
                 \Filament\Tables\Columns\TextColumn::make('name')->searchable(),
                 \Filament\Tables\Columns\TextColumn::make('slug'),
                 \Filament\Tables\Columns\TextColumn::make('icon'),
-                \Filament\Tables\Columns\TextColumn::make('fields_count')->counts('fields')->label('Fields'),
+                \Filament\Tables\Columns\TextColumn::make('fields_count')->counts('fields')->label(__('messages.fields')),
             ])
             ->filters([
                 //

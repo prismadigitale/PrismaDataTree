@@ -41,17 +41,17 @@ class FieldForm
                     ->schema([
                         \Filament\Forms\Components\TextInput::make('value')
                             ->required()
-                            ->label('Value'),
+                            ->label(__('messages.value')),
                         \Filament\Forms\Components\TextInput::make('label')
                             ->required()
-                            ->label('Label'),
+                            ->label(__('messages.label')),
                     ])
                     ->visible(fn (\Filament\Schemas\Components\Utilities\Get $get) => in_array($get('type'), ['select', 'radio', 'checkbox_list']))
                     ->columns(2)
-                    ->label('Options')
+                    ->label(__('messages.options'))
                     ->helperText('Define the available options for this field'),
                 \Filament\Forms\Components\TextInput::make('validation_rules')
-                    ->placeholder('required|min:3|max:255')
+                    ->placeholder(__('messages.validation_placeholder'))
                     ->helperText('Laravel validation rules, separated by |'),
             ]);
     }

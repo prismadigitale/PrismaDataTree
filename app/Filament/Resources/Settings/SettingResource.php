@@ -22,7 +22,20 @@ class SettingResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Configurations';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('messages.configurations');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('messages.setting');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('messages.settings');
+    }
 
     protected static ?string $recordTitleAttribute = 'key';
 
@@ -36,12 +49,12 @@ class SettingResource extends Resource
                     ->maxLength(255)
                     ->live(),
                 \Filament\Forms\Components\Select::make('value')
-                    ->label('Value')
+                    ->label(__('messages.value'))
                     ->options(\App\Models\DataType::pluck('name', 'id'))
                     ->visible(fn (\Filament\Schemas\Components\Utilities\Get $get) => $get('key') === 'default_data_type_id')
                     ->required(),
                 TextInput::make('value')
-                    ->label('Value')
+                    ->label(__('messages.value'))
                     ->visible(fn (\Filament\Schemas\Components\Utilities\Get $get) => $get('key') !== 'default_data_type_id')
                     ->required(),
             ]);
