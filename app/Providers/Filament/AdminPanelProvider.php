@@ -29,7 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
-            ->brandLogo(asset('images/logo.png'))
+            ->brandLogo(fn () => view('filament.brand-logo'))
             ->brandLogoHeight('2.5rem')
             ->colors([
                 'primary' => Color::Amber,
@@ -66,7 +66,7 @@ class AdminPanelProvider extends PanelProvider
             )
             ->renderHook(
                 name: \Filament\View\PanelsRenderHook::SIDEBAR_FOOTER,
-                hook: fn (): string => '<div class="px-6 py-3 text-xs text-gray-500 dark:text-gray-400">v'.config('app.version').'</div>',
+                hook: fn (): string => \Illuminate\Support\Facades\Blade::render('@include("filament.sidebar-footer")'),
             );
     }
 }
