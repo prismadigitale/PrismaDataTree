@@ -1,59 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PrismaDataTree
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+PrismaDataTree è un'applicazione web basata su **Laravel 12** e **Filament 5** progettata per la gestione avanzata, la visualizzazione e la ricerca di dati strutturati ad albero (Nodi).
+L'applicazione permette non solo di gestire gerarchie complesse di informazioni, ma di tipizzarle e dotarle di campi dinamici per ospitare dati flessibili.
 
-## About Laravel
+## 🚀 Architettura e Funzionamento
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Il nucleo del software ruota attorno a tre concetti principali:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. Nodi (Nodes)
+Il **Nodo** è l'elemento base dell'alberatura. Ogni nodo può avere un nodo "Padre" (creando così la struttura gerarchica) e infiniti "Figli".
+I nodi non contengono solo un banale "titolo", ma sono arricchiti da un *Tipo di Dato* che gli conferisce proprietà specifiche. 
+Tramite il **Nodes Manager** (Gestione Nodi) è possibile:
+- Esplorare l'albero visivamente in un'interfaccia ad albero navigabile.
+- Creare, spostare e organizzare i nodi in drag&drop (o tramite appositi modali).
+- Importare interi rami di dati da file XML compatibili con **TreeLine**.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 2. Tipi di Dati (Data Types)
+Ogni Nodo è associato a un **Data Type** (Tipo di Dati). Questo rappresenta la "categoria" o "classe" del nodo.
+Un Data Type definisce la natura dell'informazione che stiamo archiviando (es. `Siti`, `Account`, `Server`, `Documenti`, ecc.).
+Inoltre, in un Data Type è possibile specificare un *Default Child Type*, utile a suggerire automaticamente di che tipo dovrà essere un nodo figlio quando ne viene creato uno all'interno.
 
-## Learning Laravel
+### 3. Campi Dinamici (Fields)
+Ogni Data Type è corredato da uno o più **Fields** (Campi). I campi definiscono la "struttura dati" (scheletro) che un nodo di quel tipo dovrà ospitare.
+L'amministratore dell'applicazione può creare infiniti campi, associando loro un nome, un'etichetta (Label) e regole di validazione, e assegnarli ai vari Data Types.
+*In poche parole: PrismaDataTree funge da vero e proprio Headless CMS gerarchico dove la struttura dei dati non è fissa nel database, ma definita a runtime dall'utente stesso!*
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🔍 Il Motore di Ricerca (Sidebar)
 
-## Laravel Sponsors
+Una delle funzionalità core del progetto è il potente motore di ricerca integrato direttamente nella sidebar della Gestione Nodi.
+Il Search Engine permette ricerche granulari:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+**Scope (Ambito):**
+- **Titles only:** Cerca unicamente nei Nodi.
+- **Titles + Details:** Estende la ricerca non solo ai titoli dei nodi, ma perlustra in profondità il contenuto dinamico e i valori testuali che essi contengono nei loro infiniti campi (Fields).
 
-### Premium Partners
+**Metodo di Ricerca:**
+- **Key words:** Cerca le singole parole separate in modo elastico.
+- **Exact full words:** Cerca parole esatte rispettando i delimitatori.
+- **Exact phrase:** Cerca una frase esatta complessa.
+- **Regular expression:** Usa la potenza delle espressioni regolari (RegEx) per pattern matching complessi avanzati sui dati immagazzinati.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Una volta trovato un match, è possibile scorrere (Prev / Next) ciclicamente tra tutti i risultati rintracciati evidenziandoli visivamente nell'albero.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🌍 Multilingua (Localizzazione)
 
-## Code of Conduct
+Il pannello Filament è **completamente tradotto** ed è dotato di un *Language Switcher* nella topbar per passare tra le seguenti lingue in modo rapido (senza ricaricare le sessioni di autenticazione):
+- 🇮🇹 **Italiano** (Lingua di default principale)
+- 🇬🇧 **English** (Fallback & lingua secondaria)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Questa feature traduce etichette per Data Types, Fields, Settings, ma anche gli elementi complessi all'interno delle tabelle e dei form.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 💻 Tech Stack & Sviluppo
 
-## License
+- **Core & Framework API:** Laravel 12.x
+- **Admin Panel & Interfacce:** FilamentPHP 5.x / Livewire 4.x
+- **Ambiente Locale:** [DDEV](https://ddev.com/) (MySQL/MariaDB, PHP 8.3+)
+- **Stile:** Tailwind CSS (v4 standard Filament / JIT compilato)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+*Progetto locale privato. Cartelle di configurazione (es. `.ddev`, `.github`, ecc.) ignorate da repository origin per scopi di deployment standard.*
