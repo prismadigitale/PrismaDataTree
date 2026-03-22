@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Filament\TreePlugin\Concern\ModelTree;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Node extends Model
 {
+    use HasFactory;
     use ModelTree;
 
     public function parent()
