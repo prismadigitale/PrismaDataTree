@@ -58,7 +58,7 @@
             <div class="flex-1 flex justify-left">
                 <x-filament::button type="button" x-on:click="isDataViewOpen = !isDataViewOpen" x-bind:color="isDataViewOpen ? 'gray' : 'primary'"
                     size="sm" x-bind:icon="isDataViewOpen ? 'heroicon-o-eye-slash' : 'heroicon-o-eye'" icon-alias="tree::dataview.button">
-                    DataView
+                    {{ __('filament.tree-plugin.filament-tree.button.dataview') }}
                 </x-filament::button>
             </div>
         </div>
@@ -83,7 +83,7 @@
         <div x-show="isDataViewOpen" x-transition x-cloak class="dd-nodrag my-4 mx-6 p-5 bg-white rounded-xl shadow-sm border border-gray-100 text-sm">
             <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
                 <x-filament::icon icon="heroicon-o-information-circle" class="h-5 w-5 text-primary-500" />
-                <span class="text-base font-bold text-gray-800 uppercase tracking-tight">Record Data Details</span>
+                <span class="text-base font-bold text-gray-800 uppercase tracking-tight">{{ __('filament.tree-plugin.filament-tree.details.title') }}</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 @foreach ($dataField as $key => $value)

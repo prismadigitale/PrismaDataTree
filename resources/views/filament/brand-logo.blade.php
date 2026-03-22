@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap" rel="stylesheet">
 <div class="flex items-center gap-2">
-    <img src="{{ asset('images/logo.png') }}" alt="PrismaDataTree" class="h-8">
-    <span style="
+    <span
+        style="
         font-family: 'Outfit', sans-serif;
         font-weight: 700;
         font-size: 1.15rem;
@@ -11,4 +11,5 @@
         background-clip: text;
         letter-spacing: -0.02em;
     ">PrismaDataTree</span>
+    <img src="{{ asset('images/logo_h50.png') }}" alt="PrismaDataTree" class="h-10">
 </div>

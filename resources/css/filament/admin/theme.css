@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap');
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
 @import '../../filament-tree-nestable.css';
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+.fi-header-heading {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #f59e0b, #ea580c) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    letter-spacing: -0.02em !important;
+}
