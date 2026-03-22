@@ -2,14 +2,18 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\EditProfile;
+use CraftForge\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -17,6 +21,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
@@ -27,6 +32,11 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->profile(EditProfile::class)
+            ->userMenuItems([
+                'profile' => MenuItem::make()
+                    ->label(fn () => __('Profile').' '.(auth()->user()->locale === 'it' ? '🇮🇹' : '🇬🇧')),
+            ])
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->sidebarCollapsibleOnDesktop()
@@ -60,14 +70,18 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->renderHook(
-                name: \Filament\View\PanelsRenderHook::SIDEBAR_NAV_START,
+                name: PanelsRenderHook::SIDEBAR_NAV_START,
                 hook: fn (): string => request()->routeIs('filament.admin.pages.nodes-manager')
-                    ? \Illuminate\Support\Facades\Blade::render('@include("filament.components.tree-search-sidebar")')
+                    ? Blade::render('@include("filament.components.tree-search-sidebar")')
                     : '',
             )
             ->renderHook(
-                name: \Filament\View\PanelsRenderHook::SIDEBAR_FOOTER,
-                hook: fn (): string => \Illuminate\Support\Facades\Blade::render('@include("filament.sidebar-footer")'),
-            );
+                name: PanelsRenderHook::SIDEBAR_FOOTER,
+                hook: fn (): string => Blade::render('@include("filament.sidebar-footer")'),
+            )
+            ->plugins([
+                FilamentLanguageSwitcherPlugin::make()
+                    ->locales(['it', 'en']),
+            ]);
     }
 }
