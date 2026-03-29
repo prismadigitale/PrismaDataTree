@@ -2,6 +2,11 @@
 
 Tutti i cambiamenti notevoli a questo progetto sono documentati in questo file.
 
+## [v0.5.3] - 2026-03-29
+- Rifiniture grafiche sui nodi (3a98483)
+- Update README.md (8484031)
+- Update CHANGELOG.md (ba99601)
+
 ## [v0.5.2] - 2026-03-29
 - Generazione changelog e modifica readme con ultime implementazioni (d9bed4a)
 
