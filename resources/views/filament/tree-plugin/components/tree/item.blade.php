@@ -18,44 +18,53 @@
 
 <li x-data="{ isDataViewOpen: false }" @class(['filament-tree-row', 'dd-item', 'dd-collapsed' => $collapsed]) data-id="{{ $recordKey }}">
     <div class="dd-row">
+        {{-- Box 1: Drag handle --}}
         <div wire:loading.remove.delay wire:target="{{ implode(',', Tree::LOADING_TARGETS) }}" class="dd-handle">
             <x-filament::icon icon="heroicon-m-ellipsis-vertical" class="h-4 w-4 -mr-2" />
             <x-filament::icon icon="heroicon-m-ellipsis-vertical" class="h-4 w-4" />
         </div>
 
-        <div class="dd-content dd-nodrag flex items-center w-full gap-4 ml-2">
-            <div class="flex items-center gap-3">
+        {{-- Box 2: Expand/Collapse (Restore dd-item-btns for functionality) --}}
+        <div class="dd-handle dd-nodrag dd-item-btns" style="cursor: default; padding-left: 0.5rem; padding-right: 0.5rem; border-left: 0;">
+            @if ($children->isNotEmpty())
+                <button type="button" data-action="expand" @class([
+                    'dd-expand text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition',
+                    'hidden' => !$collapsed,
+                ])>
+                    <x-filament::icon icon="heroicon-m-chevron-right" class="h-5 w-5 pointer-events-none" />
+                </button>
+                <button type="button" data-action="collapse" @class([
+                    'dd-collapse text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition',
+                    'hidden' => $collapsed,
+                ])>
+                    <x-filament::icon icon="heroicon-m-chevron-down" class="h-5 w-5 pointer-events-none" />
+                </button>
+            @else
+                <div class="w-5 h-5"></div>
+            @endif
+        </div>
+
+        {{-- Box 3: Add Child --}}
+        <div class="dd-handle dd-nodrag flex items-center justify-center p-0 m-0" style="cursor: default; padding-left: 0.5rem; padding-right: 0.5rem; border-left: 0;">
+            <button type="button" wire:click="mountTreeAction('addChild', '{{ $recordKey }}')"
+                class="text-primary-500 hover:text-primary-600 transition flex items-center justify-center w-full h-full">
+                <x-filament::icon icon="heroicon-m-plus" class="h-5 w-5" />
+            </button>
+        </div>
+
+        <div class="dd-content dd-nodrag flex items-center w-full gap-2 pl-2">
+            {{-- Node Title/Display --}}
+            <div class="flex items-center ml-2">
                 @include('filament.tree-plugin.components.tree.item-display', [
                     'record' => $record,
                     'title' => $title,
                     'icon' => $icon,
                     'description' => $description,
                 ])
-
-                @if ($children->isNotEmpty())
-                    <div class="dd-item-btns flex items-center gap-1">
-                        <button type="button" data-action="expand" @class([
-                            'dd-expand items-center justify-center h-8 w-8 rounded-lg text-gray-400 hover:bg-gray-100 transition',
-                            'hidden' => !$collapsed,
-                        ])>
-                            <x-filament::icon icon="heroicon-o-chevron-down" class="h-4 w-4 pointer-events-none" />
-                        </button>
-                        <button type="button" data-action="collapse" @class([
-                            'dd-collapse items-center justify-center h-8 w-8 rounded-lg text-gray-400 hover:bg-gray-100 transition',
-                            'hidden' => $collapsed,
-                        ])>
-                            <x-filament::icon icon="heroicon-o-chevron-up" class="h-4 w-4 pointer-events-none" />
-                        </button>
-                    </div>
-                @endif
             </div>
 
-            <div class="flex items-center gap-2">
-                <x-filament::icon-button icon="heroicon-o-plus-circle" color="gray" size="sm"
-                    wire:click="mountTreeAction('addChild', '{{ $recordKey }}')" />
-            </div>
-
-            <div class="flex-1 flex justify-left">
+            {{-- Data View Button --}}
+            <div class="flex-1 flex justify-left ml-2">
                 <x-filament::button type="button" x-on:click="isDataViewOpen = !isDataViewOpen" x-bind:color="isDataViewOpen ? 'gray' : 'primary'"
                     size="sm" x-bind:icon="isDataViewOpen ? 'heroicon-o-eye-slash' : 'heroicon-o-eye'" icon-alias="tree::dataview.button">
                     {{ __('filament.tree-plugin.filament-tree.button.dataview') }}
