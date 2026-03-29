@@ -79,6 +79,10 @@ class AdminPanelProvider extends PanelProvider
                     : '',
             )
             ->renderHook(
+                name: PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+                hook: fn (): string => Blade::render('<livewire:vault-status />'),
+            )
+            ->renderHook(
                 name: PanelsRenderHook::SIDEBAR_FOOTER,
                 hook: fn (): string => Blade::render('@include("filament.sidebar-footer")'),
             )

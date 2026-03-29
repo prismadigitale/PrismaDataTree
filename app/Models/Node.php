@@ -31,7 +31,7 @@ class Node extends Model
     ];
 
     protected $casts = [
-        'data' => 'array',
+        'data' => \App\Casts\VaultDataCast::class,
     ];
 
     public function dataType()

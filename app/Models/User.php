@@ -54,4 +54,9 @@ class User extends Authenticatable implements FilamentUser
             'password' => 'hashed',
         ];
     }
+
+    public function vault()
+    {
+        return $this->hasOne(UserVault::class);
+    }
 }

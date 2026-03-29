@@ -199,8 +199,19 @@ class NodesManager extends TreePage
 
                         $component->label($field->label ?: str($field->name)->title());
 
-                        if ($field->validation_rules) {
+                        if ($field->validation_rules && ! ($field->is_vault_protected && !app(\App\Services\VaultService::class)->isUnlocked())) {
                             $component->rules($field->validation_rules);
+                        }
+
+                        if ($field->is_vault_protected) {
+                            $component->suffixIcon('heroicon-m-shield-check')
+                                ->suffixIconColor('success');
+
+                            if (!app(\App\Services\VaultService::class)->isUnlocked()) {
+                                $component->disabled()
+                                    ->dehydrated(false) // Do not send back the `[CRITTOGRAFATO]` text
+                                    ->helperText('Il Vault è bloccato. Questo campo è crittografato.');
+                            }
                         }
 
                         $fields[] = $component;

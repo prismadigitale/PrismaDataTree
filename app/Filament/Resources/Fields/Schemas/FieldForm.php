@@ -53,6 +53,9 @@ class FieldForm
                 \Filament\Forms\Components\TextInput::make('validation_rules')
                     ->placeholder(__('messages.validation_placeholder'))
                     ->helperText('Laravel validation rules, separated by |'),
+                \Filament\Forms\Components\Toggle::make('is_vault_protected')
+                    ->label('Protetto dal Vault / Crittografato')
+                    ->helperText("Se abilitato, i dati per questo campo verranno crittografati con la Master Passphrase del Vault dell'Utente."),
             ]);
     }
 }

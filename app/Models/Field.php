@@ -15,10 +15,12 @@ class Field extends Model
         'type',
         'options',
         'validation_rules',
+        'is_vault_protected',
     ];
 
     protected $casts = [
         'options' => 'array',
+        'is_vault_protected' => 'boolean',
     ];
 
     public function dataTypes()
