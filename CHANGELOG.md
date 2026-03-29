@@ -2,6 +2,9 @@
 
 Tutti i cambiamenti notevoli a questo progetto sono documentati in questo file.
 
+## [v0.5.2] - 2026-03-29
+- Generazione changelog e modifica readme con ultime implementazioni (d9bed4a)
+
 ## [v0.5.1] - 2026-03-29
 - Sistema di generazione semi automatica del changelog (a4d40c1)
 
