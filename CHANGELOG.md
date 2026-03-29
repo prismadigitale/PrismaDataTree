@@ -1,6 +1,9 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+Tutti i cambiamenti notevoli a questo progetto sono documentati in questo file.
+
+## [v0.5.1] - 2026-03-29
+- Sistema di generazione semi automatica del changelog (a4d40c1)
 
 ## [v0.5.0] - 2026-03-29
 - Sistema di crittografia di alcuni campi che decide l'utente (fd70a5e)

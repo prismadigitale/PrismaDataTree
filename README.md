@@ -58,9 +58,20 @@ Il pannello Filament è **completamente tradotto** ed è dotato di un *Language 
 
 Questa feature traduce etichette per Data Types, Fields, Settings, ma anche gli elementi complessi all'interno delle tabelle e dei form.
 
+## 🔒 Vault Encryption (Zero-Knowledge)
+
+La protezione dei dati sensibili all'interno dell'applicazione è garantita da un avanzato sistema di crittografia *Zero-Knowledge* (a conoscenza zero).
+
+Il **Vault** permette di crittografare individualmente il contenuto di specifici Campi (Fields) all'interno dei Nodi. Il sistema ruota attorno a una **Master Passphrase** scelta e conosciuta unicamente dall'utente, la quale non viene *mai* salvata sul server, nemmeno sotto forma di hash.
+
+- **Portabilità Estrema e Sicurezza:** L'algoritmo (che utilizza PBKDF2 e chiavi Vault AES) salva nel database solo un "sale" crittografico (`kdf_salt`) e la Vault Key stessa _già crittografata_ dalla Master Passphrase. Questo svincola completamente i dati dalla chiave del server (`APP_KEY`). Qualora il database venisse sottratto, copiato o compromesso, i dati rimarranno matematicamente illeggibili.
+- **Dati Dinamici Protetti:** Dal gestore dei campi, l'amministratore può contrassegnare con un semplice click i campi da rendere ("Protetto dal Vault / Crittografato").
+- **Cambio Chiave Istantaneo:** L'architettura a doppia chiave permette all'utente di poter cambiare la propria Master Passphrase in un istante, aggiornando la singola serratura della Vault Key senza dover ricalcolare i dati per migliaia di Nodi nel database.
+
 ---
 
 ## 💻 Tech Stack & Sviluppo
+
 
 - **Core & Framework API:** Laravel 12.x
 - **Admin Panel & Interfacce:** FilamentPHP 5.x / Livewire 4.x
