@@ -4,7 +4,7 @@
 
 # PrismaDataTree
 
-PrismaDataTree è un'applicazione web basata su **Laravel 12** e **Filament 5** progettata per la gestione avanzata, la visualizzazione e la ricerca di dati strutturati ad albero (Nodi).
+PrismaDataTree è un'applicazione web basata su **Laravel 13** e **Filament 5** progettata per la gestione avanzata, la visualizzazione e la ricerca di dati strutturati ad albero (Nodi).
 L'applicazione permette non solo di gestire gerarchie complesse di informazioni, ma di tipizzarle e dotarle di campi dinamici per ospitare dati flessibili.
 
 ## 🚀 Architettura e Funzionamento
@@ -73,7 +73,7 @@ Il **Vault** permette di crittografare individualmente il contenuto di specifici
 ## 💻 Tech Stack & Sviluppo
 
 
-- **Core & Framework API:** Laravel 12.x
+- **Core & Framework API:** Laravel 13.x
 - **Admin Panel & Interfacce:** FilamentPHP 5.x / Livewire 4.x
 - **Database Server:** MySQL/MariaDB (PHP 8.3+)
 - **Stile:** Tailwind CSS (v4 standard Filament)
